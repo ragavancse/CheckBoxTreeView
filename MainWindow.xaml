@@ -1,0 +1,64 @@
+﻿<Window
+    x:Class="TreeViewSample.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TreeViewSample"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:TreeViewSample.Model"
+    Title="MainWindow"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <model:CheckedTreeViewViewModel x:Key="CheckedTreeViewViewModel" />
+        <HierarchicalDataTemplate x:Key="template" ItemsSource="{Binding Models}">
+            <CheckBox
+                Command="{Binding DataContext.CheckedClick, RelativeSource={RelativeSource AncestorType=TreeView, AncestorLevel=1}}"
+                CommandParameter="{Binding}"
+                Content="{Binding State}"
+                IsChecked="{Binding Path=IsChecked, Mode=TwoWay}">
+                <CheckBox.Style>
+                    <Style TargetType="{x:Type CheckBox}">
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsChecked}" Value="False">
+                                <Setter Property="Foreground" Value="LightGray" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </CheckBox.Style>
+            </CheckBox>
+        </HierarchicalDataTemplate>
+        <DataTemplate x:Key="checkBoxTemplate">
+            <CheckBox Content="{Binding State}" IsChecked="{Binding Path=IsCheckeds, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <CheckBox.Style>
+                    <Style TargetType="{x:Type CheckBox}">
+                        <Setter Property="Foreground" Value="Black" />
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsChecked}" Value="False">
+                                <Setter Property="Foreground" Value="LightGray" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </CheckBox.Style>
+            </CheckBox>
+        </DataTemplate>
+
+    </Window.Resources>
+    <Grid DataContext="{StaticResource CheckedTreeViewViewModel}">
+        <TreeView
+            x:Name="treeView"
+            ItemTemplate="{StaticResource template}"
+            ItemsSource="{Binding Items}">
+            <TreeView.Resources />
+            <TreeView.ItemContainerStyle>
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="True" />
+                </Style>
+            </TreeView.ItemContainerStyle>
+        </TreeView>
+    </Grid>
+</Window>
