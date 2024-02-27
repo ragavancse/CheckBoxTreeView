@@ -7,3 +7,5 @@
 /obj
 /.vs/TreeViewSample/v17
 /bin/Debug/net6.0-windows
+/bin/Debug/net8.0-windows7.0
+/.vs/CheckBoxTreeView/v17

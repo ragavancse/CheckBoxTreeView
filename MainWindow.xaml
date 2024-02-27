@@ -49,6 +49,10 @@
 
     </Window.Resources>
     <Grid DataContext="{StaticResource CheckedTreeViewViewModel}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <TreeView
             x:Name="treeView"
             ItemTemplate="{StaticResource template}"
@@ -60,5 +64,12 @@
                 </Style>
             </TreeView.ItemContainerStyle>
         </TreeView>
+        <ItemsControl Grid.Column="1" ItemsSource="{Binding CheckedItems}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding State}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </Window>

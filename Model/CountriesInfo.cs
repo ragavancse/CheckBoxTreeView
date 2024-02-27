@@ -36,22 +36,6 @@ namespace TreeViewSample.Model
             set
             {
                 isChecked = value; OnPropertyChanged();
-
-                if (IsParent && value)
-                {
-                    foreach (var item in Models)
-                    {
-                        item.IsChecked = true;
-                    }
-                }
-                else if (IsParent)
-                {
-                    foreach (var item in Models)
-                    {
-                        item.IsChecked = false;
-                    }
-
-                }
             }
         }
 

@@ -158,6 +158,7 @@ namespace TreeViewSample.ViewModel
             {
                 foreach (var item in country.Models)
                 {
+                    item.IsChecked = true;
                     if (!CheckedItems.Contains(item))
                         CheckedItems.Add(item);
                 }
@@ -166,8 +167,9 @@ namespace TreeViewSample.ViewModel
             {
                 foreach (var item in country.Models)
                 {
-                    if (!CheckedItems.Contains(item))
-                        CheckedItems.Add(item);
+                    item.IsChecked = false;
+                    if (CheckedItems.Contains(item))
+                        CheckedItems.Remove(item);
                 }
             }
 
